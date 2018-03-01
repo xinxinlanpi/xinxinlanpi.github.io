@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/">
+    <link rel="canonical" href="http://yoursite.com/tags/前端/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/home-bg.jpg') 
-            /*config*/
+            background-image: url('/undefined')
+            /*page*/
         
     }
     
@@ -180,82 +180,62 @@
                 post-container
             ">
             
-                <!-- Main Content -->
-
-
-<div class="post-preview">
-
-    <a href="/2018/02/27/postMesage-理解和应用/">
-        <h2 class="post-title">
-            postMesage 理解和应用
-        </h2>
-        <h3 class="post-subtitle">
+                
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 归档列表 -->
             
-        </h3>
-        <div class="post-content-preview">
-            #postMessage 理解和应用
+            
 
-写在前面：学习前端的时候，跨域是一定要学习的。关于跨域的方法有很多种，比如document.domain+iframe，window.name + iframe，jsonp…等等。然鹅在学习的时候苦于没有应用场景，往往当时明白了，没多久又忘了。这次是在项目中真实运用到，所以总结下postMesage 跨域的用法。
+             <!-- 归档列表 -->
 
-业务场景需要提供给其他业务方一个SD......
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
+                    <span class="tag-text">2018</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li >
+                    02-27
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/02/27/postMesage-理解和应用/" style="color: #0085a1">
+                        <span>
+                            postMesage 理解和应用
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li >
+                    02-23
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/02/23/hello-world/" style="color: #0085a1">
+                        <span>
+                            Hello World
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+
+
         </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Melissa Zhou on
-            2018-02-27
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#前端" title="前端">前端</a>
-            
-              <a href="/tags/#js" title="js">js</a>
-            
-              <a href="/tags/#跨域" title="跨域">跨域</a>
-            
-        </div>
-    
-
+    </div>
 </div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/02/23/hello-world/">
-        <h2 class="post-title">
-            Hello World
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Melissa Zhou on
-            2018-02-23
-        </p>
-        <div class="tags">
-            
-        </div>
-    
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-</ul>
-
-
 
                 <!-- 如果开启评论功能 -->
                 
