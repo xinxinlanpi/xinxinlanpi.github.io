@@ -3,16 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 sidebar: true    # whether or not using Sidebar.
-sidebar-about-description: "ererer"
+sidebar-about-description: "a person who love life."
 sidebar-avatar: img/avatar.png
 
 # Site
-title: Hexo
+title: xinxinlanpi
 subtitle:
 description:
-author: John Doe
+author: Melissa Zhou
 language:
 timezone:
+keyword: "dfd 12113"
+SEOTitle: "xinxinlanpi personal blog"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -88,7 +90,6 @@ home_posts_tag: true
 
 header-img: img/home-bg.jpg
 signature: false #show signature
-signature-img: img/home-bg.jpg 
 
 # Markdown-it config
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
