@@ -7,7 +7,7 @@ tags:
 - 跨域
 ---
 
-#postMessage 理解和应用
+# postMessage 理解和应用
 
 > 写在前面：学习前端的时候，跨域是一定要学习的。关于跨域的方法有很多种，比如document.domain+iframe，window.name + iframe，jsonp...等等。然鹅在学习的时候苦于没有应用场景，往往当时明白了，没多久又忘了。这次是在项目中真实运用到，所以总结下postMesage 跨域的用法。
 
@@ -48,7 +48,7 @@ postMessage是HTML5 中提供的API,功能是可以安全地实现跨源通信�
 
 在a.com/index.html中嵌入一个iframe，获取到这个iframe，用iframe.contentWindow.postMessage发送一个信息
 
-###b.com/index.html
+### b.com/index.html
 
 ```jsx
 <script>
@@ -67,7 +67,8 @@ postMessage是HTML5 中提供的API,功能是可以安全地实现跨源通信�
 
 看了上面的例子大概就知道怎么动手了。我的需求几乎和例子一样。大致过程如下图：
 
-![postMesage 应用](postMesage-理解和应用/postMessage.png)
+![postMesage 应用html](postMesage-理解和应用/postMessage.png)
+![postMesage 应用js](postMesage-理解和应用/postMessage_1.png)
 
 ## 扩展
 
@@ -91,4 +92,16 @@ postMessage是HTML5 中提供的API,功能是可以安全地实现跨源通信�
 
 ## 补充
 
-一个SDK如何能再不同的环境使用呢？因为既然要校验白名单才能对消息进行处理，不能每次不同的环境更改白名单。这时候可是使用一个小技巧
+一个SDK如何能再不同的环境使用呢？因为既然要校验白名单才能对消息进行处理，不能每次不同的环境更改白名单。这时候可是使用一个小技巧，就是在js中自定义某个字符串，这个字符串储存白名单，当不同环境获取SDK的时候，我们服务端将这个特定的字符串进行改写。这样就生成了不同环境的SDK了。
+  + 所有环境的SDK代码都是一样的
+  + 在SDK文件中使用$((whiteList))(任意自己定义的格式)这样的自定义语法
+  ```js
+    var whiteDomain = '$((whiteList))';
+  ```
+  + 获取SDK文件时SDK服务端做将$((whiteList))字符串替换
+  + 获取到有不同环境的白名单的SDK
+  + 当SDK收到postMassge发来的请求，获取到postMassge的origin，用origin和whiteDomain进行对比，如果匹配就进行处理，否则不处理
+综上这个方法需要前端和服务端配合完成。
+
+
+
