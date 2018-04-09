@@ -64,7 +64,8 @@
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
+     
+        <!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
@@ -109,8 +110,8 @@
     </div>
 </header>
 
-	
-    <!-- Navigation -->
+    
+        <!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -175,6 +176,8 @@
     }
 </script>
 
+    
+	
 
     <!-- Main Content -->
     <!-- Modify by Yu-Hsuan Yen -->
@@ -190,8 +193,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>#postMessage 理解和应用</p>
-<blockquote>
+                <h1 id="postMessage-理解和应用"><a href="#postMessage-理解和应用" class="headerlink" title="postMessage 理解和应用"></a>postMessage 理解和应用</h1><blockquote>
 <p>写在前面：学习前端的时候，跨域是一定要学习的。关于跨域的方法有很多种，比如document.domain+iframe，window.name + iframe，jsonp…等等。然鹅在学习的时候苦于没有应用场景，往往当时明白了，没多久又忘了。这次是在项目中真实运用到，所以总结下postMesage 跨域的用法。</p>
 </blockquote>
 <h2 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景"></a>业务场景</h2><p>需要提供给其他业务方一个SDK，这个SDK的功能是：初始化一个登录的表单到指定的位置(div)，然后在这个表单提交后获取到我方服务器返回信息。</p>
@@ -203,7 +205,7 @@
 <h3 id="b-com-index-html"><a href="#b-com-index-html" class="headerlink" title="b.com/index.html"></a>b.com/index.html</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">"message"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(event.origin == <span class="string">'http://a.com'</span>)&#123;</span><br><span class="line">      alert(event.data);<span class="comment">//'hello'</span></span><br><span class="line">      alert(event.source);</span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;,<span class="literal">false</span>)</span><br><span class="line"> &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在b.com/index.html中监听window对象，如果有接收到postMessage，就进行处理。</p>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>看了上面的例子大概就知道怎么动手了。我的需求几乎和例子一样。大致过程如下图：</p>
-<p><img src="/2018/02/27/postMesage-理解和应用/postMessage.png" alt="postMesage 应用html"><br><img src="/2018/02/27/postMesage-理解和应用/postMessage_1.png" alt="postMesage 应用js"></p>
+<p><img src="/2018/02/27/postMesage-理解和应用/postMessage.png" alt="postMesage 应用html"><br><img src="/2018/02/27/postMesage-理解和应用/postMessage1.png" alt="postMesage 应用js"></p>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ol>
 <li><p><strong>window.postMessage() </strong>方法被调用时，会在所有页面脚本执行完毕之后（e.g., 在该方法之后设置的事件、之前设置的timeout 事件,etc.）向目标窗口派发一个  <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MessageEvent" target="_blank" rel="noopener"><code>MessageEvent</code></a> 消息。 该<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MessageEvent" target="_blank" rel="noopener"><code>MessageEvent</code></a>消息有几个属性：**</p>
 <ul>
@@ -240,10 +242,10 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                    
-                        <li class="next">
-                            <a href="/2018/02/23/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                        <li class="previous">
+                            <a href="/2018/04/08/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">&larr; Previous Post</a>
                         </li>
+                    
                     
                 </ul>
 
