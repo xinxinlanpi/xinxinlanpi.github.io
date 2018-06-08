@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="null">
+    <meta name="keyword"  content="dfd 12113">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          &#39;function-组件-sdk&#39; - xinxinlanpi personal blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2018/06/08/function-组件-sdk/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+     
+        <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#前端" title="前端">前端</a>
+                            
+                              <a class="tag" href="/tags/#js" title="js">js</a>
+                            
+                              <a class="tag" href="/tags/#跨域" title="跨域">跨域</a>
+                            
+                        </div>
+                        <h1>&#39;function-组件-sdk&#39;</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Melissa Zhou on
+                            2018-06-08
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+        <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">xinxinlanpi</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    
+	
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="function-gt-组件-gt-sdk"><a href="#function-gt-组件-gt-sdk" class="headerlink" title="function -&gt; 组件 -&gt; sdk"></a>function -&gt; 组件 -&gt; sdk</h1><blockquote>
+<p>写在前面：在开发的过中很多时候都会用到组件，有的人在初期搭建了项目，有的后来就可以直接使用项目中已有的组件。但是当需求中有一个需求是项目中没有的组件，这个组件又可能是以后常用的组件，那我们只能自己动手写组件了。</p>
+</blockquote>
+<h2 id="组件是什么"><a href="#组件是什么" class="headerlink" title="组件是什么"></a>组件是什么</h2><p>我的理解是，项目中反复会用到，具有固定功能的模块。比如：弹框，日历，autocomplete，当然还有所有的表单元素。</p>
+<p>为了说的简单，就拿一个相对独立的组件弹窗来举例。如果自己需要实现一个弹窗，我们应该如同动手？</p>
+<p>回到我说的定义，组件是具有固定功能的模块，意思就是说只要我适当的使用它，它总能实现固定的功能。</p>
+<h2 id="组件要素"><a href="#组件要素" class="headerlink" title="组件要素"></a>组件要素</h2><p>那我可以抽象的认为，组件就像一个function，一个function通常的要素是什么：名字，入参，返回值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunction = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;<span class="keyword">return</span> a * b&#125;</span><br></pre></td></tr></table></figure>
+<p>组件其实和这个很相似，举个例子，弹框组件通常是下面这个的样子。</p>
+<p><img src="/2018/06/08/function-组件-sdk/component1.png" alt="弹窗组件"></p>
+<h3 id="入参"><a href="#入参" class="headerlink" title="入参"></a>入参</h3><ul>
+<li><p>content</p>
+<p>从图上我们很容易看出，几乎只有中间部分的内容是需要调用者自己输入的内容。其他的我们希望只要初始化这个组件，就有一个一模一样的弹窗出现。</p>
+<p>如果我们把组件当成一个function的话，那我们找到了弹窗组件需要用户输入的第一个内容：中间的内容，我们用一个变量content来表示。</p>
+</li>
+</ul>
+<ul>
+<li><p>title</p>
+<p>还有什么事需要输入的呢？没错title，我们其实不希望new一个弹窗以后出现的title是“title”，几个字，而是我们自己定义的名字，这样我们就找了第二个需要输入的变量：title。</p>
+</li>
+</ul>
+<ul>
+<li><p>点击ok按钮的回调函数</p>
+<p>通常使用者点击了弹框上面的ok按钮，代表用户同意做某个事情，那些可以执行接下来的操作，那些操作其实和弹框组件本身无关，但是点击ok按钮又必要要触发这个逻辑，那我们选择以回调函数的方式传进组件来。</p>
+</li>
+<li><p>组件宽度</p>
+</li>
+</ul>
+<h3 id="组件本身的功能"><a href="#组件本身的功能" class="headerlink" title="组件本身的功能"></a>组件本身的功能</h3><p>本身的功能是指那些不需要依赖外部参数就能完成的功能。</p>
+<ul>
+<li><p>关闭</p>
+<p>这个弹窗的右上的关闭按钮和cancel按钮点击以后通常会关闭弹窗，这个功能通常可以在组件本身完成。因为关闭弹窗不需要处理任何问题</p>
+</li>
+<li><p>初始化</p>
+<p>初始化这个组件一定会发生，因为既然是一个组件，想要使用就会初始化。</p>
+</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>组件返回其实就是就是一个弹框。</p>
+<h2 id="组件开发"><a href="#组件开发" class="headerlink" title="组件开发"></a>组件开发</h2><p>有了上面的开发，我们大致能想象出如下框架</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Modal = Regular.extend(&#123;</span><br><span class="line">    name: <span class="string">'modal'</span>,</span><br><span class="line">    template: tpl,</span><br><span class="line">    config: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      _.$extend(<span class="keyword">this</span>.data, &#123;</span><br><span class="line">          title: <span class="string">'title'</span>, <span class="comment">//默认属性值</span></span><br><span class="line">          width：<span class="number">400</span>,</span><br><span class="line">          content: <span class="string">''</span>,</span><br><span class="line">          okButton: <span class="literal">true</span>,</span><br><span class="line">          cancelButton: <span class="literal">false</span>,</span><br><span class="line">          visible:<span class="literal">true</span></span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">this</span>.supr();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.supr();</span><br><span class="line">      <span class="keyword">this</span>.$inject(<span class="built_in">document</span>.body);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    ok: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'ok'</span>);</span><br><span class="line">      <span class="keyword">this</span>.destroy();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    cancel: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'cancel'</span>);</span><br><span class="line">      <span class="keyword">this</span>.destroy();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>可以说所有的入参都是组件的可配置功能，入参有的必须传入的，有的是非必传的。大部分的情况我们会给某些参数写一个默认值，如果开发者在初始化的时候灭有传这个参数，就使用默认值。但也有一些必传参数无法给与默认值，必须由开发者传入。</p>
+<p>可以说这就是组件的基本架构，有传入的参数，有组件自己的变量和方法，有回调函数。</p>
+<h2 id="其他组件开发"><a href="#其他组件开发" class="headerlink" title="其他组件开发"></a>其他组件开发</h2><p>同理，我们可以分析出一个autocomplate组件架构</p>
+<p><img src="/2018/06/08/function-组件-sdk/component2.png" alt="autocomplate组件"></p>
+<p>这个组件大家一定不陌生，就是复杂一点的输入框。基本功能是，当用户输入的时，能根据输入的字符匹配到联想内类展示在下面，如果用户点击或者用键盘选择某个值则联想框消失，或者输入的字符没有匹配到联想的任何内容，联想框也不会出现。最后，如果用户点击了联想框以外的地方，联想框也消失。</p>
+<p><a href="https://github.com/reactjs/react-autocomplete/blob/master/lib/Autocomplete.js" target="_blank" rel="noopener">https://github.com/reactjs/react-autocomplete/blob/master/lib/Autocomplete.js</a></p>
+<ul>
+<li><p>入参：</p>
+<ul>
+<li>联想的数据源items（可以是静态的，也可以是请求得到的数据）</li>
+<li>当用户选择了某个值最后的结果返回给回调函数getVal</li>
+</ul>
+</li>
+<li><p>功能：</p>
+<ul>
+<li>获取input输入的值getInputValue</li>
+<li>监听input的变化onChange</li>
+<li>监听键盘选择onSelect</li>
+<li>input失焦，则收起联想，并返回最终值onInputBlur</li>
+</ul>
+</li>
+<li><p>返回值：</p>
+<ul>
+<li>最终用户选择的联想值，如果没有选择的联想值则返回input框输入的值</li>
+</ul>
+</li>
+</ul>
+<p>所以根据上面的分析，我们组件大致是下面这个样子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Autocomplate = Regular.extend(&#123;</span><br><span class="line">    name: <span class="string">'autocomplate'</span>,</span><br><span class="line">    template: tpl,</span><br><span class="line">    config: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      _.$extend(<span class="keyword">this</span>.data, &#123;</span><br><span class="line">          items: &#123;&#125;, <span class="comment">//默认属性值</span></span><br><span class="line">          isOpen: <span class="literal">false</span>，</span><br><span class="line">          realValue：<span class="string">''</span></span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">this</span>.supr();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.supr();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    onChange: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.data.isOpen = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">this</span>.getRealValue();</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'getVal'</span>,<span class="keyword">this</span>.data.realValue);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    onSelect: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.data.isOpen = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">this</span>.getRealValue();</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'getVal'</span>,<span class="keyword">this</span>.data.realValue);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">   onInputBlur: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.data.isOpen = <span class="literal">false</span>;</span><br><span class="line">     <span class="keyword">this</span>.getRealValue();</span><br><span class="line">     <span class="keyword">this</span>.$emit(<span class="string">'getVal'</span>, <span class="keyword">this</span>.data.realValue);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">   getInputValue: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.data.input;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    getRealValue: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>这里只是写个大概，最终当然还有很多需要处理的内容。但是大体的结构也就是那三个最重要的要素。入参，功能，返回值。也就是，传入的静态变量和回调函数，组件本身的功能函数，和返回值。</p>
+<p>事实上我们很多常用的组件，都是用这样的思路写出来的，像slider，page等，但是根据功能的不同复杂程度也不同。</p>
+<h2 id="SDK的开发"><a href="#SDK的开发" class="headerlink" title="SDK的开发"></a>SDK的开发</h2><p>SDK是什么？我的理解就是具有一定功能的集合，这听起来是不是和组件很相似。没错，我觉得非常相似。</p>
+<p>下面举个栗子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SDK(&#123;</span><br><span class="line">        container: elementID,</span><br><span class="line">        onSuccess: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (result.ret) &#123;</span><br><span class="line">  			<span class="comment">//一些处理</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        onFail: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="comment">//一些处理</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+<p>这个SDK的组件有3个入参，分别是1个静态变量和两个回调函数，从onSuccess回调函数可能看出，这个这组件的返回值是result。这就是最常见的SDK初始化过程。</p>
+<h3 id="SDK功能"><a href="#SDK功能" class="headerlink" title="SDK功能"></a>SDK功能</h3><p>需要提供给其他业务方一个SDK，这个SDK的功能是：初始化一个登录的表单到指定的位置(div)，然后在这个表单提交后获取到我方服务器返回信息。</p>
+<p>说白了就是，他们new一下就出现一个我们提供的登录框，如下图：</p>
+<p><img src="/2018/06/08/function-组件-sdk/postMessage.png" alt=""></p>
+<p>初步分析</p>
+<ul>
+<li>入参:<ul>
+<li>需要指定的div的id</li>
+<li>需要成功和失败的回调函数</li>
+</ul>
+</li>
+<li>功能：<ul>
+<li>我方负责渲染页面插入指定的id的div</li>
+<li>我方服务器返回的信息要通知业务方，涉及到跨域</li>
+<li>成功以后执行回调函数</li>
+<li>销毁SDK</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>ret</li>
+</ul>
+</li>
+</ul>
+<p>综上，我们的SDK大概的样子就是这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">define([], <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> SDK = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>)</span>&#123;</span><br><span class="line">    options = options || &#123;&#125;;</span><br><span class="line">    <span class="keyword">this</span>.container = options.container;</span><br><span class="line">    <span class="keyword">this</span>.createBody(options);</span><br><span class="line">    <span class="keyword">this</span>.onMessage(options.onSuccess, options.onFail);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  pro = SDK.prototype;</span><br><span class="line"></span><br><span class="line">  pro.createBody = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.body = <span class="keyword">this</span>.container;</span><br><span class="line">    <span class="keyword">this</span>.addIframe(<span class="string">'https://fdfdfdfd'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  pro.addIframe = <span class="function"><span class="keyword">function</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.nIframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</span><br><span class="line">    <span class="keyword">this</span>.nIframe.src = url;</span><br><span class="line">    <span class="keyword">this</span>.body.appendChild(<span class="keyword">this</span>.nIframe);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  pro.onMessage = <span class="function"><span class="keyword">function</span>(<span class="params">onSuccess, onFail</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.onmessage = util._$bind(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">      event = event || <span class="built_in">window</span>.event;</span><br><span class="line">      <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(event.data),</span><br><span class="line">          ret = data.ret;</span><br><span class="line">      <span class="keyword">if</span>(ret)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> onSuccess=== <span class="string">'function'</span>))&#123;</span><br><span class="line">          onSuccess.call(<span class="keyword">this</span>, data);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> onFail=== <span class="string">'function'</span>)&#123;</span><br><span class="line">          onFail.call(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, <span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  pro.close = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(<span class="keyword">this</span>.__body);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">window</span>.NEO = NEO;</span><br><span class="line">  <span class="keyword">return</span> NEO;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上就是我想要分享的组件和SDK开发思路。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/04/09/Redux理解和应用/" data-toggle="tooltip" data-placement="top" title="'Redux理解和应用'">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Melissa Zhou 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
