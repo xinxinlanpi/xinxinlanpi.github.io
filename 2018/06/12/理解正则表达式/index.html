@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="null">
+    <meta name="keyword"  content="dfd 12113">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          &#39;理解正则表达式&#39; - xinxinlanpi personal blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2018/06/12/理解正则表达式/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+     
+        <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#前端" title="前端">前端</a>
+                            
+                              <a class="tag" href="/tags/#js" title="js">js</a>
+                            
+                              <a class="tag" href="/tags/#正则表达式" title="正则表达式">正则表达式</a>
+                            
+                        </div>
+                        <h1>&#39;理解正则表达式&#39;</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Melissa Zhou on
+                            2018-06-12
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+        <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">xinxinlanpi</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    
+	
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="理解正则表达式"><a href="#理解正则表达式" class="headerlink" title="理解正则表达式"></a>理解正则表达式</h1><blockquote>
+<p>写在前面：正则表达式对于前端开发来说不陌生，虽然使用的频率不是很高，但也难免遇到。可是每次看着网上的解释，我都很头痛。知道项目组中有大神，我决定向大神取经，带我入门。这次的目标就是读懂下面一个表达式：<code>/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</code>。这个表达式是从网上找来的。希望通过这次的学习，可以读懂。</p>
+</blockquote>
+<h2 id="正则表达式是什么"><a href="#正则表达式是什么" class="headerlink" title="正则表达式是什么"></a>正则表达式是什么</h2><p>描述了一种字符串匹配的模式。</p>
+<p>这样听起来非常抽象，我的理解是，一系列的规则，可以判断字符串是否符合规则。</p>
+<p>常见正则表达式如下：</p>
+<ul>
+<li><code>/^(13|14|15|17|18)\d{9}$/</code>  匹配手机号</li>
+<li><code>/^([\w\.-]+)@[\w][\w\.-]*[\w]\.([a-zA-Z]{2,6})$/</code>  匹配邮箱</li>
+<li><code>/^[0-9]{6}$/</code>  匹配短信验证码</li>
+</ul>
+<p>用最简单的一个来举例<code>/^[0-9]{6}$/</code>，看下这个是怎么组成的</p>
+<p><img src="/2018/06/12/理解正则表达式/reg.png" alt="理解正则表达式图1"></p>
+<p>可以看到，一般的的这则表达式大致由三个部分组成，中括号包起来的字符集，花括号包起来的限定符，以及一些表示特定意思的特殊字符。</p>
+<p><strong>字符集</strong>:表示匹配的字符的集合，上面的例子表示，0,1,2,3,4,5,6,7,8,9</p>
+<p><strong>限定符</strong>：表示对前面的字符集进行某种限定，上面的例子，表示只能是6个字符</p>
+<p><strong>特殊字符</strong>:<strong>^</strong>表示匹配输入字符串的开始位置</p>
+<p><strong>特殊字符</strong>:<strong>$</strong>表示匹配输入字符串的结束位置</p>
+<p>所以所有的连接起来的意思是只能是0-9中的6个数字组成的字符串。如094567,547845，这种就是符合规则的，dfd456这种就不符合规格。</p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><p>看了上面的例子，感觉好像懂了。然而回头看看这篇文章的目标</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.-A-Za-z]+)(?::(\d+))?(?:\/(?#))?(?:\?(#))?(?:#(.*))?$/</span><br></pre></td></tr></table></figure>
+<p>是不是感觉一脸懵逼，百脸懵逼，我是谁？我在哪里？······</p>
+<p>接下来，为了能解说这个正则表达式，我们再来学习一些符号。</p>
+<h3 id=""><a href="#" class="headerlink" title="()"></a>()</h3><p>查阅网站得到如下解说：<code>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用</code></p>
+<p>看了又是一脸懵逼，什么意思？</p>
+<p>举个栗子：一个匹配网站二级域名的正则表达式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)?$/</span></span><br><span class="line"></span><br><span class="line">regParentHost.exec(<span class="string">'https://xxdfd.163.123.com:8080'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080","123.com",":8080"]</span></span><br></pre></td></tr></table></figure>
+<p>经过观察，这个正则表达式与第一个例子表达式有个很重要的区别，就是有（）。看到上面的结果，可以看出exec返回一个数组，数组的第二值就是我们想要的域名。为什么是第二个呢？</p>
+<p>有的文章解释说：括号被称为 捕获括号。我们把括号去掉，得到如下表达式:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.\w+\.\w+:.*$/</span></span><br><span class="line"></span><br><span class="line">regParentHost.exec(<span class="string">'https://xxdfd.163.123.com:8080'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080"]</span></span><br></pre></td></tr></table></figure>
+<p>结果如上，没有返回域名和端口号，而加上了两个小括号，就会得到3个结果。</p>
+<p>我们来尝试添加一个（）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.(\w+\.\w+):.*$/</span></span><br><span class="line"></span><br><span class="line">regParentHost.exec(<span class="string">'https://xxdfd.163.123.com:8080'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080","123.com"]</span></span><br></pre></td></tr></table></figure>
+<p>结果如我所想，返回了两个值。这样我们再看<code>标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用</code></p>
+<p>这个解释好像能明白一些。如果出现括号，则认为是一个子表达式，如果字符串中有满足子表达式的，将这些字符串保存起来，最后可以以数组的形式返回。如果括号中的子表达式没有被匹配到，就返回undefined。</p>
+<p>也就是说有几个（）就会有几个结果返回。</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title="?"></a>?</h3><p>说完（），就来说重头戏问号。</p>
+<h4 id="用法1"><a href="#用法1" class="headerlink" title="?用法1:"></a>?用法1:</h4><h4 id="匹配前面一个表达式0次或者1次。等价于-0-1"><a href="#匹配前面一个表达式0次或者1次。等价于-0-1" class="headerlink" title="匹配前面一个表达式0次或者1次。等价于 {0,1}"></a>匹配前面一个表达式0次或者1次。等价于 {0,1}</h4><p>查阅网站，解说如下：匹配前面一个表达式0次或者1次。等价于 {0,1}。</p>
+<p>还是这个栗子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)?$/</span></span><br></pre></td></tr></table></figure>
+<p>后半段<code>(:.*)?</code>括号后面有个问号。</p>
+<p><code>：</code>表示匹配‘：’，</p>
+<p><code>.</code>号表示匹配除“<code>\r</code>”“<code>\n</code>”之外的任何单个字符，</p>
+<p><code>*</code>表示匹配前面的子表达式零次或多次。</p>
+<p>括号里面连起来就是，匹配：后面的所有字符零次或多次。</p>
+<p>然后<code>？</code>表示匹配前面一个表达式0次或者1次，换一种说法就是，匹配前面一个表达式有或者没有。</p>
+<p>有问号没问号什么区别？看例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHost2 = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)$/</span></span><br><span class="line"></span><br><span class="line">regParentHost2.exec(<span class="string">'https://xxdfd.163.123.com:8080'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080"，"123.com"，":8080"]</span></span><br><span class="line">-------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)？$/</span></span><br><span class="line"></span><br><span class="line">regParentHost.exec(<span class="string">'https://xxdfd.163.123.com:8080'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080"，"123.com"，":8080"]</span></span><br><span class="line">-------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> regParentHost2 = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)$/</span></span><br><span class="line"></span><br><span class="line">regParentHost2.exec(<span class="string">'https://xxdfd.163.123.com'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br><span class="line">------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)？$/</span></span><br><span class="line"></span><br><span class="line">regParentHost.exec(<span class="string">'https://xxdfd.163.123.com'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com"，"123.com"，undefined]</span></span><br></pre></td></tr></table></figure>
+<p>从上面的例子可以看出来，在测试’htttps://xxdfd.163.123.com:8080’ 这个字符串的时候，两者返回的没有区别，但是测试’htttps://xxdfd.163.123.com’ 这字符串的时候返回的不一样，一个是在返回的数组中的第三个位置返回undefined，一个直接是null。因为正则表达式中如果有<code>？</code> 就表示，有也可以，没有也可以。所以上面的例子中字符串中有没有<code>：</code> 都可以匹配成功。如果没有<code>？</code> 则表示字符串中一定要有<code>：</code> 否则就匹配失败。</p>
+<p>上面栗子的正则表达式的目的是提取一个网站的主域名。明眼人一看就知道，这个正则不能达到目的，因为，很多的网站的端口号是默认的，并没有显示出来，像这样’htttps://xxdfd.163.123.com/abc’ ，测试结果如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)?$/</span></span><br><span class="line"></span><br><span class="line">regParentHost.exec(<span class="string">'https://xxdfd.163.123.com/abc'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//null</span></span><br></pre></td></tr></table></figure>
+<p>果然无法匹配。怎么修改？其实我们已经大致有方向了。</p>
+<p>既然是通常的网站，我们可以匹配<code>：</code> 后面是数字，数字后面是<code>/</code> ,斜杠后面是任意字符</p>
+<p>大致的样子就是下面这样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHostNew = <span class="regexp">/^.+\.(\w+\.\w+)(:\d+)?(\/.+)?$/</span></span><br><span class="line"></span><br><span class="line">regParentHostNew.exec(<span class="string">'https://xxdfd.163.123.com/abc'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com/abc", "123.com", undefined, "/abc"]</span></span><br><span class="line">-------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">regParentHostNew.exec(<span class="string">'https://xxdfd.163.123.com:8080/abc'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080/abc", "123.com", ":8080", "/abc"]</span></span><br></pre></td></tr></table></figure>
+<p>修改的就是加上了匹配冒号后的一个或者多个数字，匹配/后面的任意字符。</p>
+<p>上面的例子还没有说完，为什么<code>(\w+\.\w+)</code> 中就可以匹配二级域名？</p>
+<p>我们引入另一个有关问号的关键概念：<strong>非贪婪</strong> 和<strong>贪婪模式</strong>。</p>
+<h4 id="用法2"><a href="#用法2" class="headerlink" title="?用法2:"></a>?用法2:</h4><h4 id="如果紧跟在任何量词-、-、-或-的后面，将会使量词变为非贪婪的（匹配尽量少的字符），和缺省使用的贪婪模式（匹配尽可能多的字符）正好相反。"><a href="#如果紧跟在任何量词-、-、-或-的后面，将会使量词变为非贪婪的（匹配尽量少的字符），和缺省使用的贪婪模式（匹配尽可能多的字符）正好相反。" class="headerlink" title="如果紧跟在任何量词 *、 +、? 或 {} 的后面，将会使量词变为非贪婪的（匹配尽量少的字符），和缺省使用的贪婪模式（匹配尽可能多的字符）正好相反。"></a>如果<strong>紧跟在任何量词 *、 +、? 或 {} 的后面</strong>，将会使量词变为<strong>非贪婪</strong>的（匹配尽量少的字符），和缺省使用的<strong>贪婪模式</strong>（匹配尽可能多的字符）正好相反。</h4><p>再看例子<code>/^.+\.(\w+\.\w+)(:.*)$/</code> 中前面的部分<code>.+\.</code> ，</p>
+<p><code>.</code> 表示匹配除<code>\r</code>，<code>\n</code>之外的任何单个字符，</p>
+<p><code>+</code> 可以理解为量词，表示匹配前面一个表达式1次或者多次，</p>
+<p><code>\.</code> 匹配点号。</p>
+<p>连起来的意思是，匹配任意字符直到点号，那么’htttps://xxdfd.163.123.com/abc’ 中，匹配的应该是’<a href="https://xxdfdf.&#39;。" target="_blank" rel="noopener">https://xxdfdf.&#39;。</a></p>
+<p>再看后面<code>(\w+\.\w+)</code> ，</p>
+<p><code>\w</code>匹配一个单字字符（字母、数字或者下划线）,</p>
+<p><code>+</code> 量词，表示匹配前面一个表达式1次或者多次,</p>
+<p><code>\.</code> 匹配点号，</p>
+<p><code>\w+</code> 匹配一个单字字符（字母、数字或者下划线)1次或者多次，</p>
+<p><code>(\w+\.\w+)</code> 连起来就是匹配xxxx.xxxxx这样的字符串。</p>
+<p>根据上面的分析，<code>(\w+\.\w+)</code> 匹配到的应该是<code>163.123</code> 才对，可是结果却是<code>123.com</code> </p>
+<p>这是为何？原来忽略了<strong>非贪婪</strong> 和<strong>贪婪模式</strong> 。</p>
+<p><code>.+\.</code> 其中有个量词<code>+</code> ,这个加号后面没有跟随一个<code>?</code> 则说明处于<strong>贪婪模式</strong> 。这个模式下可以匹配尽可能多的字符。怎么理解呢？</p>
+<p><code>.+\.</code> 意思是匹配任意字符直到<code>.</code> ,在非贪婪模式下可以匹配到’htttps://xxdfd.163.123.’ ，因为点号前面的都可以看成是任意字符，但是，紧接着后面的<code>(\w+\.\w+)</code>,需要匹配xxxx.xxxxx，且（）的优先级比较高，所以，优先匹配了’123.com’，最终，<code>.+\.</code> 就匹配了’htttps://xxdfd.163’ 。</p>
+<p>为了证实这个说法，我们可以使用非贪婪模式验证一下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'https://xxdfd.163.123.com:8080/dfdf'</span>.match(<span class="regexp">/^.+?\.(\w+\.\w+).+$/</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080/dfdf", "163.123"]</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，结果就变成”163.123”。</p>
+<h3 id="（？：pattern）"><a href="#（？：pattern）" class="headerlink" title="（？：pattern）"></a>（？：pattern）</h3><p>前面的正则表达式中返回的端口号前面有个冒号。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regParentHost = <span class="regexp">/^.+\.(\w+\.\w+)(:.*)$/</span></span><br><span class="line"></span><br><span class="line">regParentHost.exec(<span class="string">'https://xxdfd.163.123.com:8080'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxdfd.163.123.com:8080"，"123.com"，":8080"]</span></span><br></pre></td></tr></table></figure>
+<p>数组第三个元素值是’：8080‘，如果我们不想要其中的’：‘怎么做呢？</p>
+<p>下面隆重推出<code>？</code> 和其他搭配使用的第一种，和冒号搭配。</p>
+<p>查阅网站，得到如下解说<code>（？：pattern）</code> ：匹配pattern但不获取匹配的子字符串，也就是说这是一个非获取匹配，不存储匹配的子字符串用于向后引用。</p>
+<p>举个栗子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/^(aaa)(?:b)(ccc)$/.exec(<span class="string">'aaabccc'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["aaabccc", "aaa", "ccc"]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/^(aaa)(b)(ccc)$/.exec(<span class="string">'aaabccc'</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment">// ["aaabccc", "aaa", "b", "ccc"]</span></span><br></pre></td></tr></table></figure>
+<p>上面两个唯一不同的地方就是b是被（？：pattern）这样的表达式包围的，再看看之前的解说，匹配pattern但不获取匹配的子字符串，这里就是匹配字母b，但是不会作为结果返回。</p>
+<p>所以<code>/^.+\.(\w+\.\w+)(:.*)$/</code> 这个正则表达式如果想要匹配到冒号，但是不输出，可以使用（？：pattern）的语法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/^.+\.(\w+\.\w+)(?::(.*))$/.exec(<span class="string">'https://xxxxxxx.163.126.com:8080'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://xxxxxxx.163.126.com:8080", "126.com", "8080"]</span></span><br></pre></td></tr></table></figure>
+<p>知道以上的几个知识点，已经可以解答这个文章最终的正则表达式了。但是为了我以后能更好的理解正则表达式，大神还给我补充了以下知识点</p>
+<h3 id="x-y"><a href="#x-y" class="headerlink" title="x(?=y)"></a>x(?=y)</h3><p>匹配’x’仅仅当’x’后面跟着’y’.这种叫做正向肯定查找。</p>
+<p>如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/Jack(?=Sprat)/.exec(<span class="string">'JackSprat'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["Jack"]</span></span><br><span class="line">---------------------------------------</span><br><span class="line"></span><br><span class="line">/Jack(?=Sprat)/.exec(<span class="string">'JackSpraa'</span>)</span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>/Jack(?=Sprat)/会匹配到’Jack’仅仅当它后面跟着’Sprat’。/Jack(?=Sprat|Frost)/匹配‘Jack’仅仅当它后面跟着’Sprat’或者是‘Frost’。但是‘Sprat’和‘Frost’都不是匹配结果的一部分。</p>
+<p>还有一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/aaa(?=bb)bbc/.exec(<span class="string">'aaabbc'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["aaabbc"]</span></span><br><span class="line">-----------------------------------</span><br><span class="line"></span><br><span class="line">/aaa(?=bb)c/.exec(<span class="string">'aaabbc'</span>)</span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>这个例子可以看出，匹配aaa，后面必须是bb，但是(?=bb)后面的表达式却是从aaa后面开始匹配，并不是从bb后开始。使用的时候应该注意。</p>
+<h3 id="x-y-1"><a href="#x-y-1" class="headerlink" title="x(?!y)"></a>x(?!y)</h3><p>匹配’x’仅仅当’x’后面不跟着’y’,这个叫做正向否定查找。也就是非的意思。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/aaa(?!bb)/.exec(<span class="string">'aaab'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["aaa"]</span></span><br><span class="line">---------------------------------</span><br><span class="line">/aaa(?!bb)/.exec(<span class="string">'aaabb'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>同样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/aaa(?!bb)c/.exec(<span class="string">'aaac'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["aaac"]</span></span><br><span class="line">---------------------------------</span><br><span class="line">/aaa(?!bb)c/.exec(<span class="string">'aaam'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>匹配aaa，后面不能是bb，但是(?！bb)后面的表达式却是从aaa后面开始匹配。使用时候应该注意。</p>
+<h2 id="解惑"><a href="#解惑" class="headerlink" title="解惑"></a>解惑</h2><p>最后我们来解读下文章开头的正则表达式</p>
+<p><code>/^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</code></p>
+<p>我们先按照小括号一部分一部分的拆开：</p>
+<ol>
+<li><p><code>(?:  ([A-Za-z]+):)?</code></p>
+<p><code>[a-zA-Z]</code> 英文字母，</p>
+<p><code>+</code> 量词，匹配前面表达式1次或者多次，</p>
+<p><code>：</code> 匹配冒号</p>
+<p>连起来就是，匹配’abc:’</p>
+</li>
+<li><p><code>(\/{0,3})</code></p>
+<p><code>\/</code> 匹配’/‘</p>
+<p><code>{0,3}</code> 量词，匹配前面表达式0到3次，</p>
+<p>连起来就是，匹配’///‘</p>
+</li>
+<li><p><code>([0-9.\-A-Za-z]+)</code> </p>
+<p><code>0-9</code> 匹配数字</p>
+<p><code>.</code> 中括号里面的点表示点号本身‘.’</p>
+<p><code>\-</code> 匹配短横线‘-’</p>
+<p><code>A-Za-z</code> 字母</p>
+<p><code>+</code> 匹配一次或多次，后面没有‘？’，所以使用贪婪模式，尽量匹配多的字符串。</p>
+<p>连起来就是，匹配字母或者数字’.’或者‘-’，匹配‘abc0123.dfdfdf’</p>
+</li>
+<li><p><code>(?:  :(\d+))?</code> </p>
+<p><code>:</code> 匹配冒号</p>
+<p><code>(\d+)</code> 匹配数字，尽可能多的匹配</p>
+<p><code>(?:  :）</code> 匹配冒号，但是冒号不作为结果返回</p>
+<p>连起来就是，匹配‘:8080’这样的字符串，然后返回的只有‘8080’。</p>
+</li>
+<li><p><code>(?:  \/([^?#]*))?</code></p>
+<p><code>\/</code> 匹配‘/’</p>
+<p><code>[^?#]</code> 匹配所有字符除了‘？’或者‘#’</p>
+<p><code>*</code> 量词，匹配前一个表达式0次或多次</p>
+<p><code>(?:  \/)</code> 匹配‘/’,但不作为结果输出</p>
+<p>连起来就是，匹配斜杠后面的任意字符直到遇到’？’或者’#’，也就是’/aaaa’,返回’aaaa’。</p>
+</li>
+<li><p><code>(?:   \?([^#]*))?</code></p>
+<p><code>\?</code> 匹配问号’？‘</p>
+<p><code>[^#]</code> 匹配所有字符除了‘#’</p>
+<p><code>*</code> 量词，匹配前一个表达式0次或多次</p>
+<p><code>(?:  \?)</code> 匹配‘？’,但不作为结果输出</p>
+<p>连起来就是，匹配问号后面的任意字符直到遇到‘#’，也就是’?c=4’,返回’c=4‘。</p>
+</li>
+<li><p><code>(?:  #(.*))?</code></p>
+<p><code>#</code> 匹配’#‘</p>
+<p><code>.</code> 匹配除换行符 \n 之外的任何单字符</p>
+<p><code>*</code> 量词，匹配前面的子表达式零次或多次，默认匹配多次</p>
+<p><code>(?:   #)</code> 匹配’#‘号但是不作为返回值</p>
+<p>连起来就是，匹配#号后面任意字符，也就是，’#bbb‘，返回’bbb‘</p>
+</li>
+</ol>
+<p>综上，整个表达式就是匹配<strong>‘htttps://domain.com:1000/ac/asdasdf?query=xx#dasf’</strong> 这样的字符串，并且返回字符串的各个部分。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/</span><br><span class="line">.exec(<span class="string">'https://domain.com:1000/ac/asdasdf?query=xx#dasf'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ["https://domain.com:1000/ac/asdasdf?query=xx#dasf"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// , "https", "//", "domain.com", "1000", "ac/asdasdf", "query=xx", "dasf"]</span></span><br><span class="line">https:<span class="comment">//domain.com:1000/ac/asdasdf?query=xx#dasf</span></span><br></pre></td></tr></table></figure>
+<p>看到这里，我想已经能看懂大部分的正则表达式了。还有什么看不懂的可以自己查阅资料来学习。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/06/08/function-组件-sdk/" data-toggle="tooltip" data-placement="top" title="'function-组件-sdk'">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Melissa Zhou 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
