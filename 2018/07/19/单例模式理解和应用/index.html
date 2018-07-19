@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="null">
+    <meta name="keyword"  content="dfd 12113">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          单例模式理解和应用 - xinxinlanpi personal blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2018/07/19/单例模式理解和应用/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+     
+        <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#前端" title="前端">前端</a>
+                            
+                              <a class="tag" href="/tags/#js" title="js">js</a>
+                            
+                              <a class="tag" href="/tags/#模式" title="模式">模式</a>
+                            
+                        </div>
+                        <h1>单例模式理解和应用</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Melissa Zhou on
+                            2018-07-19
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+        <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">xinxinlanpi</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    
+	
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="单例模式理解和应用"><a href="#单例模式理解和应用" class="headerlink" title="单例模式理解和应用"></a>单例模式理解和应用</h1><blockquote>
+<p>写在前面：前段时间在看Rx js时候看到观察者模式，联想到单例模式，然后自己学习了下。不看不知道，原来自己在平时写代码的过程中用的最多的就是单例模式。在项目中也有很多应用。这里做下总结。</p>
+</blockquote>
+<h3 id="什么是单例模式"><a href="#什么是单例模式" class="headerlink" title="什么是单例模式?"></a>什么是单例模式?</h3><p>什么是单例模式?顾名思义，就是只有一个实例。即使多次实例化一个类，也只返回第一次的实例。这样说可能比较抽象，看看实际中最简单的单例模式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hmacsha256 = &#123;</span><br><span class="line">  name: <span class="string">'哈希加密'</span>,</span><br><span class="line">  encrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  decrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">hmacsha256.name <span class="comment">// '哈希加密'</span></span><br></pre></td></tr></table></figure>
+<p>上面字面量形式的创建对象，这个对象hmacsha256有两个方法一个变量。可以通过hmacsha256.encrypt()来调用方法。这是我们最常见的单例模式。但是这样写有个特点，就是hmacsha256的所有方法和变量都是公共的，但是如果有一些内部的辅助函数我们不希望暴露出去的话，这样的单例就无法满足我们的需求。</p>
+<h3 id="有私有变量的单例模式"><a href="#有私有变量的单例模式" class="headerlink" title="有私有变量的单例模式"></a>有私有变量的单例模式</h3><p>如果像上面说的那样，不想要把所有的方法和变量都暴露出去，以免有的方法被修改，那我们可以只返回自己想要暴露的方法和变量，就像下面这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hmacsha256 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 私有变量和方法 */</span></span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'哈希加密'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPrivate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 公有变量和方法（可以访问私有变量和方法） */</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getValue: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            showPrivate();</span><br><span class="line">        &#125;,</span><br><span class="line">        encrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">      	decrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> single = hmacsha256();</span><br><span class="line">single.getValue();  <span class="comment">// '哈希加密'</span></span><br></pre></td></tr></table></figure>
+<p>这样我们对外暴露了3个方法，而name值不在能通过<code>hmacsha256.name</code> 拿到，所以name已经变成了类的私有变量，只有通过<code>single.getValue()</code> 才能拿到，如果，不提供修改这个值的方法，外部就无法修改这个变量。这其实这是一个闭包的典型应用。</p>
+<p>通过这个修改以后发我们发现，这个类在应用这个js的时候初始化一次，但是如果这个js里面的方法一直没有被用到的话，那就等于浪费了一些开销，因为一直没有用到。于是我们希望在引入的时候也不实例化，而是在真正使用的时候在实例化，这就引入了一个<code>懒性单例的概念</code> </p>
+<h3 id="懒性单例"><a href="#懒性单例" class="headerlink" title="懒性单例"></a>懒性单例</h3><p>怎么样能做到引入的时候不实例化呢？我们借助自执行函数来实现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 懒性单例写法一 */</span></span><br><span class="line"><span class="keyword">var</span> hmacsha256 = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> instance;</span><br><span class="line">   	<span class="comment">/* 私有变量和方法 */</span></span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'哈希加密'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPrivate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">option</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*这里定义单例代码*/</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          getValue: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">              showPrivate();</span><br><span class="line">          &#125;,</span><br><span class="line">          encrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">          decrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getInstance: <span class="function"><span class="keyword">function</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!instance) &#123;</span><br><span class="line">                instance = init(option);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*调用公有的方法来获取实例:*/</span></span><br><span class="line">hmacsha256.getInstance();</span><br></pre></td></tr></table></figure>
+<p>自执行函数，我的理解是一种巧妙的方法，使得我们可以将匿名函数以函数表达式的方式进行创建，并返回匿名函数对象的引用。在结尾加上一对括号，可以调用匿名函数对象的引用，让函数立即被执行。</p>
+<p>这里需要说明一下，<code>()</code> 的作用，<code>()</code> 的作用是迫使js解析器在解析的时候<strong>强制将括号内的表达式（expression）转化为对象，而不是作为语句（statement）来执行</strong> 。也就是说<code>(function () {})</code> 这个括号中虽然有function关键字，但是由于有括号，所有解析器并没有把他当做一个function，而是强制把里面的内容转成了一个对象，并返回指向这个对象的指针。</p>
+<p><code>（）</code> 在这里的作用与用<strong>Eval把json格式字符串转换为json对象</strong> 时的作用一样，这就是为啥<code>eval(&quot;(&quot; + testJson + &quot;)&quot;);</code> 一定要多加一个括号的原因。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="built_in">eval</span>(<span class="string">"&#123;&#125;"</span>);  <span class="comment">// return undefined</span></span><br><span class="line">alert(<span class="built_in">eval</span>(<span class="string">"(&#123;&#125;)"</span>);<span class="comment">// return object[Object]</span></span><br></pre></td></tr></table></figure>
+<p>事实上，上面的代码和下面的写法的效果一样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 懒性单例写法二 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hmacsha256</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> instance;</span><br><span class="line">   	<span class="comment">/* 私有变量和方法 */</span></span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'哈希加密'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPrivate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params">option</span>) </span>&#123;</span><br><span class="line">        <span class="comment">/*这里定义单例代码*/</span></span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          getValue: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">              showPrivate();</span><br><span class="line">          &#125;,</span><br><span class="line">          encrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">          decrypt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getInstance: <span class="function"><span class="keyword">function</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!instance) &#123;</span><br><span class="line">                instance = init(option);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*调用公有的方法来获取实例:*/</span></span><br><span class="line">hmacsha256().getInstance();</span><br></pre></td></tr></table></figure>
+<p>但是为什么要使用自执行函数呢？答案就是<strong>隔离作用域</strong> 。第二种写法虽然功能可以实现，但是function hmacsha256这个方法随时候有可能被人改写。第一种写法中，就算你hmacsha256返回上千种方法，里面有再多的私有变量，都不影响其他的作用域。他只管hmacsha256这个变量下的东西，就像有一个命名空间一样。</p>
+<h3 id="单例模式解决了什么问题？"><a href="#单例模式解决了什么问题？" class="headerlink" title="单例模式解决了什么问题？"></a>单例模式解决了什么问题？</h3><p>单例模式只有一个实例，节约了系统的开销。如果希望在系统中某个类的对象只能存在一个，单例模式是最好的解决方案。比如，工具类，登录框，导航，这些都是系统中单例模式的绝佳使用场景。除了能解决这种业务场景的问题，隔离作用域和模块的分割也是我们使用的最多的姿势。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hmacsha256 = &#123;</span><br><span class="line">  encrypt: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  decrypt: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> getAuthorization = <span class="function"><span class="keyword">function</span> (<span class="params">token</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> authorization;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  hmacsha256,</span><br><span class="line">  getAuthorization</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="单例模式在项目实战应用"><a href="#单例模式在项目实战应用" class="headerlink" title="单例模式在项目实战应用"></a>单例模式在项目实战应用</h3><p>项目中有个需求是提供一个sdk，初始化以后可以生成一个顶部和右侧的导航栏。这个导航栏真个项目中只有一个，只需要一个实例，这就是典型的单例模式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">window</span>.mySDK = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> instance;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">initSDK</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">      <span class="comment">/* </span></span><br><span class="line"><span class="comment">      判断是否登录，获取账号信息</span></span><br><span class="line"><span class="comment">      初始化顶栏和侧边栏</span></span><br><span class="line"><span class="comment">      调用外部传进来的init方法</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showSd</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">      <span class="comment">/*控制侧边栏展开还是收起*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">resetSd</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">      <span class="comment">/*传入新的filter方法并重置左侧导航*/</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">constructor</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">      </span><br><span class="line">      initSDK(option);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        head: option.head,<span class="comment">/*初始化顶部的div的id*/</span></span><br><span class="line">        side: option.side,<span class="comment">/*初始左侧导航栏div的id*/</span></span><br><span class="line">        sdHide: option.sdHide,</span><br><span class="line">        showSd: showSd,</span><br><span class="line">        resetSd: resetSd,</span><br><span class="line">        init: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">typeof</span>(option.init)===<span class="string">'function'</span> ? option.init() : <span class="literal">undefined</span></span><br><span class="line">        &#125;,</span><br><span class="line">        signOut: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">typeof</span>(option.signOut)===<span class="string">'function'</span> ? option.signOut() : <span class="literal">undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      getInstance: <span class="function"><span class="keyword">function</span> (<span class="params">option</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!instance) &#123;</span><br><span class="line">          instance = <span class="keyword">constructor</span>(option)</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var options = &#123;</span><br><span class="line">  sdHide: <span class="literal">false</span>,</span><br><span class="line">  resetSd: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mySDK = <span class="built_in">window</span>.mySDK.getInstance(&#123;</span><br><span class="line">  head: <span class="string">'top'</span>,</span><br><span class="line">  side: <span class="string">'left'</span>,</span><br><span class="line">  resetSd: options.filterSd,</span><br><span class="line">  sdHide: options.sdHide,</span><br><span class="line">  init: options.init</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这里把实现的具体的内容省去，其实在 initSDK 中做了很多的工作。但这是有关业务的内容，我们需要根据不同的业务员场景自行实现。但运用单例模式，可以保证导航栏只有一个实例。</p>
+<p>其他参考文章：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/34754447" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34754447</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/06/12/理解正则表达式/" data-toggle="tooltip" data-placement="top" title="'理解正则表达式'">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Melissa Zhou 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
