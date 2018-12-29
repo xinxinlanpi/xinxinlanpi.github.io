@@ -209,7 +209,7 @@
 <h2 id="设计理念"><a href="#设计理念" class="headerlink" title="设计理念"></a>设计理念</h2><p>在接触mvvm的框架的时候会有一些感觉，我们是通过改变数据来改变视图的，因为mvvm框架通常是双向绑定的。react是单向数据流，我们也可以通过某种手段使得同样的数据对应同样的视图。redux的设计理念就是，所有的数据都由store来管理。所有的变动都由action来发起。当view层发起一个action以后，最后由reducers来执行，reducers是一个纯函数，也就是说，只要是同样的输入，必定得到同样的输出。经过reducer处理返回新的state更新到store中。这样的流程使得所有的数据更新都要通过这个流程。</p>
 <p>可以理解为一个所有的组件都共用一个store，这样，第一小节中提到的：组件的状态，需要共享；某个状态需要在任何地方都可以拿到；一个组件需要改变全局状态；一个组件需要改变另一个组件的状态等组件之间的通行或者跨页面之间的共享问题就得到解决。</p>
 <p>有了redux的规范，项目的文件也会更加清晰，同时也提升了开发体验</p>
-<h2 id="Redux工作流程"><a href="#Redux工作流程" class="headerlink" title="Redux工作流程"></a>Redux工作流程</h2><p><img src="/2018/04/09/Redux理解和应用/redux.png" alt="Redux工作流程"></p>
+<h2 id="Redux工作流程"><a href="#Redux工作流程" class="headerlink" title="Redux工作流程"></a>Redux工作流程</h2><p><img src="Redux理解和应用/redux.png" alt="Redux工作流程"></p>
 <p>整个工作流程是，view层触发action，store更具action找到对应的reducer，并将当前state和action传给reducer，reducer处理完数据以后返回新的state，view层根据新的state更新视图。</p>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h3><p>Store 就是保存数据的一个对象，一个容器。整个应用有一个 Store。</p>
 <p>Redux 提供<code>createStore</code>这个函数，用来生成 Store。</p>

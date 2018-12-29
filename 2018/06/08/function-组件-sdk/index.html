@@ -202,7 +202,7 @@
 <h2 id="组件要素"><a href="#组件要素" class="headerlink" title="组件要素"></a>组件要素</h2><p>那我可以抽象的认为，组件就像一个function，一个function通常的要素是什么：名字，入参，返回值。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunction = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;<span class="keyword">return</span> a * b&#125;</span><br></pre></td></tr></table></figure>
 <p>组件其实和这个很相似，举个例子，弹框组件通常是下面这个的样子。</p>
-<p><img src="/2018/06/08/function-组件-sdk/component1.png" alt="弹窗组件"></p>
+<p><img src="function-组件-sdk/component1.png" alt="弹窗组件"></p>
 <h3 id="入参"><a href="#入参" class="headerlink" title="入参"></a>入参</h3><ul>
 <li><p>content</p>
 <p>从图上我们很容易看出，几乎只有中间部分的内容是需要调用者自己输入的内容。其他的我们希望只要初始化这个组件，就有一个一模一样的弹窗出现。</p>
@@ -236,7 +236,7 @@
 <p>可以说所有的入参都是组件的可配置功能，入参有的必须传入的，有的是非必传的。大部分的情况我们会给某些参数写一个默认值，如果开发者在初始化的时候灭有传这个参数，就使用默认值。但也有一些必传参数无法给与默认值，必须由开发者传入。</p>
 <p>可以说这就是组件的基本架构，有传入的参数，有组件自己的变量和方法，有回调函数。</p>
 <h2 id="其他组件开发"><a href="#其他组件开发" class="headerlink" title="其他组件开发"></a>其他组件开发</h2><p>同理，我们可以分析出一个autocomplate组件架构</p>
-<p><img src="/2018/06/08/function-组件-sdk/component2.png" alt="autocomplate组件"></p>
+<p><img src="function-组件-sdk/component2.png" alt="autocomplate组件"></p>
 <p>这个组件大家一定不陌生，就是复杂一点的输入框。基本功能是，当用户输入的时，能根据输入的字符匹配到联想内类展示在下面，如果用户点击或者用键盘选择某个值则联想框消失，或者输入的字符没有匹配到联想的任何内容，联想框也不会出现。最后，如果用户点击了联想框以外的地方，联想框也消失。</p>
 <p><a href="https://github.com/reactjs/react-autocomplete/blob/master/lib/Autocomplete.js" target="_blank" rel="noopener">https://github.com/reactjs/react-autocomplete/blob/master/lib/Autocomplete.js</a></p>
 <ul>
@@ -270,7 +270,7 @@
 <p>这个SDK的组件有3个入参，分别是1个静态变量和两个回调函数，从onSuccess回调函数可能看出，这个这组件的返回值是result。这就是最常见的SDK初始化过程。</p>
 <h3 id="SDK功能"><a href="#SDK功能" class="headerlink" title="SDK功能"></a>SDK功能</h3><p>需要提供给其他业务方一个SDK，这个SDK的功能是：初始化一个登录的表单到指定的位置(div)，然后在这个表单提交后获取到我方服务器返回信息。</p>
 <p>说白了就是，他们new一下就出现一个我们提供的登录框，如下图：</p>
-<p><img src="/2018/06/08/function-组件-sdk/postMessage.png" alt="登录组件"></p>
+<p><img src="function-组件-sdk\postMessage.png" alt="登录组件"></p>
 <p>初步分析</p>
 <ul>
 <li>入参:<ul>
