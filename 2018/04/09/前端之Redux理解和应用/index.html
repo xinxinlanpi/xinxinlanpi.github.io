@@ -7,18 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="PMMDN4FHjSZ_-qYQksJzFKhuwenthBA1bN_QtLTMp9Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="null">
-    <meta name="keyword"  content="dfd 12113">
+    
+    <meta name="description" content="本文先把纯使用react开发中组件通信的之前的困难抛出,然后引出redux解决了这个问题和redux的设计理念。随后总结了redux的工作流程,和主要的一些方法。最后用实际的例子说明怎么运用redux。还补充了纯函数和函数式编程的概念,并指回答了reducer为什么必须是纯函数的问题。">
+    
+    
+    <meta name="keywords" content="redux,react,状态管理,前端,安全,js,html">
+    
     <link rel="shortcut icon" href="/img/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          &#39;Redux理解和应用&#39; - xinxinlanpi personal blog
+          前端之Redux理解和应用 - xinxinlanpi personal blog
         
     </title>
 
-    <link rel="canonical" href="https://xinxinlanpi.github.io/2018/04/09/Redux理解和应用/">
+    <link rel="canonical" href="https://xinxinlanpi.github.io/2018/04/09/前端之Redux理解和应用/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -96,7 +100,7 @@
                               <a class="tag" href="/tags/#react" title="react">react</a>
                             
                         </div>
-                        <h1>&#39;Redux理解和应用&#39;</h1>
+                        <h1>前端之Redux理解和应用</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Melissa Zhou on
@@ -319,12 +323,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/06/08/function-组件-sdk/" data-toggle="tooltip" data-placement="top" title="'function-组件-sdk'">&larr; Previous Post</a>
+                            <a href="/2018/06/08/function-组件-sdk/" data-toggle="tooltip" data-placement="top" title="function-组件-sdk">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2018/02/27/postMesage-理解和应用/" data-toggle="tooltip" data-placement="top" title="postMesage 理解和应用">Next Post &rarr;</a>
+                            <a href="/2018/02/27/前端之postMesage-理解和应用/" data-toggle="tooltip" data-placement="top" title="前端之 postMesage 理解和应用">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -391,7 +395,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Melissa Zhou 2018 
+                    Copyright &copy; Melissa Zhou 2019 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
