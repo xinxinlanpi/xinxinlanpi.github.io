@@ -9,16 +9,16 @@ sidebar-avatar: img/avatar.png
 # Site
 title: xinxinlanpi
 subtitle:
-description:
+description: 本网站是一个个人技术博客,博客内容主要关于js,html,css,react,redux,前端安全等前端技术问题,博客内容大多是工作中的经验总结以及对前端技术的一些见解。
 author: Melissa Zhou
 language:
 timezone:
-keyword: "dfd 12113"
+keywords: 前端,安全,js,html
 SEOTitle: "xinxinlanpi personal blog"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://xinxinlanpi.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -101,3 +101,9 @@ markdown:
     linkify: true
     typographer: true
     quotes: '“”‘’'
+
+sitemap:
+    path: sitemap.xml
+baidusitemap:
+    path: baidusitemap.xml
+

@@ -5,20 +5,24 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="PMMDN4FHjSZ_-qYQksJzFKhuwenthBA1bN_QtLTMp9Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="null">
-    <meta name="keyword"  content="dfd 12113">
+    
+    <meta name="description" content="本文先把纯使用react开发中组件通信的之前的困难抛出,然后引出redux解决了这个问题和redux的设计理念。随后总结了redux的工作流程,和主要的一些方法。最后用实际的例子说明怎么运用redux。还补充了纯函数和函数式编程的概念,并指回答了reducer为什么必须是纯函数的问题。">
+    
+    
+    <meta name="keywords" content="redux,react,状态管理,前端,安全,js,html">
+    
     <link rel="shortcut icon" href="/img/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          &#39;Redux理解和应用&#39; - xinxinlanpi personal blog
+          前端之Redux理解和应用 - xinxinlanpi personal blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/2018/04/09/Redux理解和应用/">
+    <link rel="canonical" href="https://xinxinlanpi.github.io/2018/04/09/前端之Redux理解和应用/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -96,7 +100,7 @@
                               <a class="tag" href="/tags/#react" title="react">react</a>
                             
                         </div>
-                        <h1>&#39;Redux理解和应用&#39;</h1>
+                        <h1>前端之Redux理解和应用</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Melissa Zhou on
@@ -209,7 +213,7 @@
 <h2 id="设计理念"><a href="#设计理念" class="headerlink" title="设计理念"></a>设计理念</h2><p>在接触mvvm的框架的时候会有一些感觉，我们是通过改变数据来改变视图的，因为mvvm框架通常是双向绑定的。react是单向数据流，我们也可以通过某种手段使得同样的数据对应同样的视图。redux的设计理念就是，所有的数据都由store来管理。所有的变动都由action来发起。当view层发起一个action以后，最后由reducers来执行，reducers是一个纯函数，也就是说，只要是同样的输入，必定得到同样的输出。经过reducer处理返回新的state更新到store中。这样的流程使得所有的数据更新都要通过这个流程。</p>
 <p>可以理解为一个所有的组件都共用一个store，这样，第一小节中提到的：组件的状态，需要共享；某个状态需要在任何地方都可以拿到；一个组件需要改变全局状态；一个组件需要改变另一个组件的状态等组件之间的通行或者跨页面之间的共享问题就得到解决。</p>
 <p>有了redux的规范，项目的文件也会更加清晰，同时也提升了开发体验</p>
-<h2 id="Redux工作流程"><a href="#Redux工作流程" class="headerlink" title="Redux工作流程"></a>Redux工作流程</h2><p><img src="/2018/04/09/Redux理解和应用/redux.png" alt="Redux工作流程"></p>
+<h2 id="Redux工作流程"><a href="#Redux工作流程" class="headerlink" title="Redux工作流程"></a>Redux工作流程</h2><p><img src="Redux理解和应用/redux.png" alt="Redux工作流程"></p>
 <p>整个工作流程是，view层触发action，store更具action找到对应的reducer，并将当前state和action传给reducer，reducer处理完数据以后返回新的state，view层根据新的state更新视图。</p>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h3><p>Store 就是保存数据的一个对象，一个容器。整个应用有一个 Store。</p>
 <p>Redux 提供<code>createStore</code>这个函数，用来生成 Store。</p>
@@ -319,12 +323,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/06/08/function-组件-sdk/" data-toggle="tooltip" data-placement="top" title="'function-组件-sdk'">&larr; Previous Post</a>
+                            <a href="/2018/06/08/function-组件-sdk/" data-toggle="tooltip" data-placement="top" title="function-组件-sdk">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2018/02/27/postMesage-理解和应用/" data-toggle="tooltip" data-placement="top" title="postMesage 理解和应用">Next Post &rarr;</a>
+                            <a href="/2018/02/27/前端之postMesage-理解和应用/" data-toggle="tooltip" data-placement="top" title="前端之 postMesage 理解和应用">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -391,7 +395,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Melissa Zhou 2018 
+                    Copyright &copy; Melissa Zhou 2019 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
@@ -454,7 +458,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+        async("https://xinxinlanpi.github.io/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -489,7 +493,7 @@
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
-<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<img src="https://xinxinlanpi.github.io/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

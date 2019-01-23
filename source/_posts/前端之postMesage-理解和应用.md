@@ -1,6 +1,8 @@
 ---
-title: postMesage 理解和应用
+title: 前端之 postMesage 理解和应用
 date: 2018-02-27 15:07:58
+keywords: postMesage,跨域,通信
+description: 本文主要介绍怎么通过使用postMessage跨域通信,列举一个了实际的运用场景,并说明了一些注意事项。
 tags:
 - 前端
 - js

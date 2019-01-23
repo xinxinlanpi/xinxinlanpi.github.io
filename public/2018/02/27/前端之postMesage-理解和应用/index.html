@@ -5,20 +5,24 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="PMMDN4FHjSZ_-qYQksJzFKhuwenthBA1bN_QtLTMp9Y" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="null">
-    <meta name="keyword"  content="dfd 12113">
+    
+    <meta name="description" content="本文主要介绍怎么通过使用postMessage跨域通信,列举一个了实际的运用场景,并说明了一些注意事项。">
+    
+    
+    <meta name="keywords" content="postMesage,跨域,通信,前端,安全,js,html">
+    
     <link rel="shortcut icon" href="/img/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          postMesage 理解和应用 - xinxinlanpi personal blog
+          前端之 postMesage 理解和应用 - xinxinlanpi personal blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/2018/02/27/postMesage-理解和应用/">
+    <link rel="canonical" href="https://xinxinlanpi.github.io/2018/02/27/前端之postMesage-理解和应用/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -94,7 +98,7 @@
                               <a class="tag" href="/tags/#跨域" title="跨域">跨域</a>
                             
                         </div>
-                        <h1>postMesage 理解和应用</h1>
+                        <h1>前端之 postMesage 理解和应用</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Melissa Zhou on
@@ -205,7 +209,7 @@
 <h3 id="b-com-index-html"><a href="#b-com-index-html" class="headerlink" title="b.com/index.html"></a>b.com/index.html</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">"message"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(event.origin == <span class="string">'http://a.com'</span>)&#123;</span><br><span class="line">      alert(event.data);<span class="comment">//'hello'</span></span><br><span class="line">      alert(event.source);</span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;,<span class="literal">false</span>)</span><br><span class="line"> &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在b.com/index.html中监听window对象，如果有接收到postMessage，就进行处理。</p>
 <h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>看了上面的例子大概就知道怎么动手了。我的需求几乎和例子一样。大致过程如下图：</p>
-<p><img src="/2018/02/27/postMesage-理解和应用/postMessage.png" alt="postMesage 应用html"><br><img src="/2018/02/27/postMesage-理解和应用/postMessage1.png" alt="postMesage 应用js"></p>
+<p><img src="postMesage-理解和应用/postMessage.png" alt="postMesage 应用html"><br><img src="postMesage-理解和应用/postMessage1.png" alt="postMesage 应用js"></p>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ol>
 <li><p><strong>window.postMessage() </strong>方法被调用时，会在所有页面脚本执行完毕之后（e.g., 在该方法之后设置的事件、之前设置的timeout 事件,etc.）向目标窗口派发一个  <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MessageEvent" target="_blank" rel="noopener"><code>MessageEvent</code></a> 消息。 该<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MessageEvent" target="_blank" rel="noopener"><code>MessageEvent</code></a>消息有几个属性：**</p>
 <ul>
@@ -243,7 +247,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/04/09/Redux理解和应用/" data-toggle="tooltip" data-placement="top" title="'Redux理解和应用'">&larr; Previous Post</a>
+                            <a href="/2018/04/09/前端之Redux理解和应用/" data-toggle="tooltip" data-placement="top" title="前端之Redux理解和应用">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -311,7 +315,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Melissa Zhou 2018 
+                    Copyright &copy; Melissa Zhou 2019 
                     <br>
                     Theme by <a href="http://huangxuan.me">Hux</a> 
                     <span style="display: inline-block; margin: 0 5px;">
@@ -374,7 +378,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+        async("https://xinxinlanpi.github.io/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -409,7 +413,7 @@
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
-<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<img src="https://xinxinlanpi.github.io/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

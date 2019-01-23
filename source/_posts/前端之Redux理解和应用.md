@@ -1,6 +1,8 @@
 ---
-title: '''Redux理解和应用'''
+title: '前端之Redux理解和应用'
 date: 2018-04-09 20:09:41
+keywords: redux,react,状态管理
+description: 本文先把纯使用react开发中组件通信的之前的困难抛出,然后引出redux解决了这个问题和redux的设计理念。随后总结了redux的工作流程,和主要的一些方法。最后用实际的例子说明怎么运用redux。还补充了纯函数和函数式编程的概念,并指回答了reducer为什么必须是纯函数的问题。
 tags:
 - 前端
 - js

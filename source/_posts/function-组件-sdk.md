@@ -1,6 +1,8 @@
 ---
-title: '''function-组件-sdk'''
+title: 'function-组件-sdk'
 date: 2018-06-08 09:34:58
+keywords: 前端,js,function,组件,sdk
+description: 本文主要说明前端发开中封装组件的一种思路。这个思路从一般函数延展到组件，最后延展到sdk的封装。对于前端开发是非常重要的技能。
 tags:
 - 前端
 - js
