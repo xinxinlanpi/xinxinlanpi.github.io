@@ -32,7 +32,7 @@ var myFunction = function (a, b) {return a * b}
 
 组件其实和这个很相似，举个例子，弹框组件通常是下面这个的样子。
 
-![弹窗组件](function-组件-sdk/component1.png)
+![弹窗组件](component1.png)
 
 ### 入参
 
@@ -117,7 +117,7 @@ var Modal = Regular.extend({
 
 同理，我们可以分析出一个autocomplate组件架构
 
-![autocomplate组件](function-组件-sdk/component2.png)
+![autocomplate组件](component2.png)
 
 这个组件大家一定不陌生，就是复杂一点的输入框。基本功能是，当用户输入的时，能根据输入的字符匹配到联想内类展示在下面，如果用户点击或者用键盘选择某个值则联想框消失，或者输入的字符没有匹配到联想的任何内容，联想框也不会出现。最后，如果用户点击了联想框以外的地方，联想框也消失。
 
@@ -220,7 +220,7 @@ new SDK({
 
 说白了就是，他们new一下就出现一个我们提供的登录框，如下图：
 
-![登录组件](function-组件-sdk\postMessage.png)
+![登录组件](postMessage.png)
 
 初步分析
 

@@ -41,7 +41,7 @@ redux是一种解决方案。react只是 DOM 的一个抽象层，并不是 Web 
 
 ## Redux工作流程
 
-![Redux工作流程](Redux理解和应用/redux.png)
+![Redux工作流程](redux.png)
 
 整个工作流程是，view层触发action，store更具action找到对应的reducer，并将当前state和action传给reducer，reducer处理完数据以后返回新的state，view层根据新的state更新视图。
 

@@ -69,8 +69,8 @@ postMessage是HTML5 中提供的API,功能是可以安全地实现跨源通信�
 
 看了上面的例子大概就知道怎么动手了。我的需求几乎和例子一样。大致过程如下图：
 
-![postMesage 应用html](postMesage-理解和应用/postMessage.png)
-![postMesage 应用js](postMesage-理解和应用/postMessage1.png)
+![postMesage 应用html](postMessage.png)
+![postMesage 应用js](postMessage1.png)
 ## 扩展
 
 1. **window.postMessage() **方法被调用时，会在所有页面脚本执行完毕之后（e.g., 在该方法之后设置的事件、之前设置的timeout 事件,etc.）向目标窗口派发一个  [`MessageEvent`](https://developer.mozilla.org/zh-CN/docs/Web/API/MessageEvent) 消息。 该[`MessageEvent`](https://developer.mozilla.org/zh-CN/docs/Web/API/MessageEvent)消息有几个属性：**
